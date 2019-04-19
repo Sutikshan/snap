@@ -10,8 +10,6 @@ const SNAP_TIME_MULTIPLIER = 1000;
 
 class App extends Component<{}, IAppState> {
   private snapTimeoutId: number = -1;
-  // following flag is used as semaphore, as setState is an asynchronous operation.
-  private computerWonCurrentRound: boolean = false;
 
   public constructor() {
     super({});
@@ -24,20 +22,28 @@ class App extends Component<{}, IAppState> {
     this.setState({ snapWaitTime  });
   }
 
+  private setTimerForComputerToPlay = () => {
+    if (this.state.nextTurn === COMPUTER) {
+      window.setTimeout(() => {
+        this.setState(onComputerMove, () => {
+          if (this.state.cardMatched) {
+            this.setTimerForComputerToSnap();
+          }
+        });
+      }, WAIT_FOR_COMPUTER);
+    }
+  }
+
   private setTimerForComputerToSnap = () => {
     this.snapTimeoutId = window.setTimeout(() => {
-      this.computerWonCurrentRound = true;
       this.setState(onComputerSnap, () => {
-        this.computerWonCurrentRound = false;
-        window.setTimeout(() => {
-          this.setState(onComputerMove);
-        }, WAIT_FOR_COMPUTER);
+        this.setTimerForComputerToPlay();
       });
     }, this.state.snapWaitTime * SNAP_TIME_MULTIPLIER);
   }
 
   private onCardPlay = () => {
-    if (this.state.waitForComputer) {
+    if (this.state.cardMatched || this.state.nextTurn === COMPUTER) {
       return;
     }
 
@@ -46,24 +52,17 @@ class App extends Component<{}, IAppState> {
         this.setTimerForComputerToSnap();
         return;
       }
-      window.setTimeout(() => {
-        this.setState(onComputerMove, () => {
-          if (this.state.cardMatched) {
-            this.setTimerForComputerToSnap();
-          }
-        });
-      }, WAIT_FOR_COMPUTER);
+      this.setTimerForComputerToPlay();
     });
   }
 
-  private onPlayerSnap = () => {
-    window.clearTimeout(this.snapTimeoutId);
-    if (!this.state.cardMatched || this.computerWonCurrentRound) {
+  private onOpenCardClick = () => {
+    if (!this.state.cardMatched) {
       return;
     }
+    window.clearTimeout(this.snapTimeoutId);
 
-    this.computerWonCurrentRound = false;
-    this.setState(onPlayerSnap);
+    this.setState(onPlayerSnap, this.setTimerForComputerToPlay);
   }
 
   private reStart = () => {
@@ -80,7 +79,7 @@ class App extends Component<{}, IAppState> {
           <HiddenCardStack
             cardStackBelongTo={COMPUTER} />
           <OpenCardStack
-            onClick={this.onPlayerSnap}
+            onClick={this.onOpenCardClick}
             currentCard={currentCard}
           />
           <HiddenCardStack

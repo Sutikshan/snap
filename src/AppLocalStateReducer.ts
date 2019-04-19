@@ -94,6 +94,5 @@ export const onPlayerSnap = (prevState: IAppState) => {
     openCards: [],
     cardMatched: false,
     currentRoundResult: PLAYER,
-    waitForComputer: false,
   }
 };
