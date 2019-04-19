@@ -4,7 +4,7 @@
 .club { background-image: url('../img/club.png'); }
 
 .spade, .heart, .diamond, .club {
-	height: 40px; width: 40px;
+	height: 40px; width: 35px;
 	background-repeat : no-repeat;
   	overflow          : hidden;
   	background-size: 30px auto;

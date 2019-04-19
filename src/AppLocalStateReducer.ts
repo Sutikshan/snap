@@ -13,7 +13,7 @@ export const getInitialState = (): IAppState => {
     computerCards,
     openCards: [],
     waitForComputer: false,
-    snapWaitTime: 5,
+    snapWaitTime: 1,
     cardMatched: false,
     finalWinner: '',
     currentRoundResult: '',

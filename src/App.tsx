@@ -3,7 +3,13 @@ import './App.css';
 import { IAppState, COMPUTER, PLAYER } from './App.config';
 import HiddenCardStack from './HiddenCardStack';
 import OpenCardStack from './OpenCardStack';
-import { getInitialState, onPlayerMove, onComputerMove, onComputerSnap, onPlayerSnap } from './AppLocalStateReducer';
+import {
+  getInitialState,
+  onPlayerMove,
+  onComputerMove,
+  onComputerSnap,
+  onPlayerSnap,
+} from './AppLocalStateReducer';
 
 const WAIT_FOR_COMPUTER = 400;
 const SNAP_TIME_MULTIPLIER = 1000;
@@ -103,6 +109,7 @@ class App extends Component<{}, IAppState> {
             type="range"
             id="reactionTimeInput"
             name="reactionTime"
+            className="reversedRange"
             min="1" max="5" />
         </div>
         <button

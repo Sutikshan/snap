@@ -35,17 +35,7 @@
 
 .cardContainer {
   width: 15em;
-  height: 20em;
+  height: 22em;
   border: 1px solid darkgray;
   border-radius: 1em;
-}
-
-.hiddenCardStack {
-  margin-top: 2em;
-  background-color: cornflowerblue;
-}
-
-.openCardStack {
-  margin-top: 5em;
-  background-color: white;
 }

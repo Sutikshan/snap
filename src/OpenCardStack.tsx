@@ -1,5 +1,6 @@
 import React, { StatelessComponent } from 'react';
 import { ICard, getCardStackStyle } from './App.config';
+import './OpenCardStack.css';
 
 interface IOpenCardStackProps {
   onClick: () => void;
@@ -9,12 +10,18 @@ interface IOpenCardStackProps {
 
 const OpenCardStack: StatelessComponent<IOpenCardStackProps> =
   ({ availableCardCount, onClick, currentCard }) => {
-    const style = getCardStackStyle(availableCardCount);
-
+    const style = getCardStackStyle(availableCardCount, true);
+    if (!currentCard) {
+      return <div className="cardContainer openCardStack" />
+    }
     return (
-      <div onClick={onClick} className="cardContainer openCardStack" style={style}>
-        {currentCard && currentCard.cardRank}
-        {currentCard && currentCard.cardSuit}
+      <div onClick={onClick}
+        className="cardContainer openCardStack"
+        style={style}>
+        <div className="cornerImage">{currentCard.cardRank}<div className={currentCard.cardSuit}/></div>
+        <div className="cornerImage">{currentCard.cardRank}<div className={currentCard.cardSuit}/></div>
+        <div className="cornerImage">{currentCard.cardRank}<div className={currentCard.cardSuit}/></div>
+        <div className="cornerImage">{currentCard.cardRank}<div className={currentCard.cardSuit}/></div>
       </div>
     );
   }

@@ -7,15 +7,15 @@ export const COMPUTER = 'Computer';
 export const PLAYER = 'Player';
 
 export enum CARD_SUIT {
-  club = 'CLUB',
-  diamond = 'DIAMOND',
-  heart = 'HEART',
-  spade = 'SPADE',
+  club = 'club',
+  diamond = 'diamond',
+  heart = 'heart',
+  spade = 'spade',
 }
 
 export interface ICard {
   cardSuit: CARD_SUIT,
-  cardRank: number,
+  cardRank: string | number,
 }
 
 export interface IDealtCards {
@@ -32,11 +32,12 @@ export interface IAppState extends IDealtCards {
   currentRoundResult: string;
   nextTurn: string;
 }
+const cardRanks = ['A', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
 
 const createDeckForSuit = (cardSuit: CARD_SUIT): ICard[] => {
   const cardSuitCollection: ICard[] = [];
-  for (var i = 1; i <= SUIT_LENGTH; i++) {
-    cardSuitCollection.push({ cardRank: i + 1, cardSuit })
+  for (var i = 0; i < SUIT_LENGTH; i++) {
+    cardSuitCollection.push({ cardRank: cardRanks[i] , cardSuit })
   }
   return cardSuitCollection;
 };
@@ -60,10 +61,10 @@ export interface ICardDeckStyle {
   backgroundColor: string;
 }
 
-export function getCardStackStyle(availableCardCount: number): ICardDeckStyle {
+export function getCardStackStyle(availableCardCount: number, openCard?: boolean): ICardDeckStyle {
   const shadowThickness = Math.floor(availableCardCount/3);
   const boxShadow = `${shadowThickness}px ${shadowThickness}px 5px darkgrey`;
-  const backgroundColor = !availableCardCount ? 'white' : 'cornflowerblue';
+  const backgroundColor = !availableCardCount || openCard ? 'white' : 'cornflowerblue';
 
   return { boxShadow, backgroundColor };
 }

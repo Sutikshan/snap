@@ -20,13 +20,13 @@ const HiddenCardsStack: StatelessComponent<IHiddenCardsStackProps> =
     return (
       <div className="hiddenCardContainer" onClick={onClick}>
         <label>{cardStackBelongTo}</label>
-        <div className='cardContainer hiddenCardStack'
-          style={style}>
-          {isNextTurn && <label aria-label={nextTurnLabel}>🙋</label>}
-
-          <div className="playerStatus">
-            {isCurrentRoundWinner && <label aria-label={currentRoundWinner}>⭐</label>}
-          </div>
+        <div className="cardContainer hiddenCardStack" style={style}>
+          <span className="playerStatus">
+            {isNextTurn && !!availableCardCount && <label aria-label={nextTurnLabel}>🙋</label>}
+          </span>
+          <span className="playerStatus">
+            {isCurrentRoundWinner && <label  className="playerStatus" aria-label={currentRoundWinner}>⭐</label>}
+          </span>
         </div>
       </div>
     );

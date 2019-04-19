@@ -1,0 +1,37 @@
+.openCardStack {
+  position: relative;
+  margin-top: 5em;
+  background-color: white;
+}
+
+.cornerImage {
+  position: absolute;
+  margin: 0.25em;
+  font-size: 1.75em;
+}
+
+.cornerImage:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.cornerImage:nth-child(2) {
+  top: 0;
+  right: 0;
+}
+
+.cornerImage:nth-child(3) {
+  bottom: 0;
+  left: 0;
+  transform: rotate(180deg);
+}
+
+.cornerImage:nth-child(4) {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+
+.reversedRange {
+  direction: rtl;
+}
