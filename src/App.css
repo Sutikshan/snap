@@ -4,24 +4,30 @@
   width: 55em;
 }
 
-.CardSetup {
+.cardSetup {
   display: flex;
   justify-content: space-between;
   width: 55em;
 }
 
-.ReactionTime {
+.reactionTime {
   margin-top: 2em;
 }
 
-.ReactionTime > input {
+.reactionTime > input {
   margin: 1em;
 }
 
-.StartButton {
+.startButton {
   background-color: #008CBA;
   font-size: 16px;
   padding: 10px 32px;
   color: white;
   margin: 1em;
+}
+
+.snapHeader {
+  display: flex;
+  margin: auto;
+  justify-content: center;
 }

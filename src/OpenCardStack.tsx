@@ -9,8 +9,8 @@ interface IOpenCardStackProps {
 const divStyle = {
   backgroundColor: 'cornflowerblue',
   ...CARD_SIZE,
-  border: '1px solid red',
-  marginTop: '2em',
+  border: '2px solid red',
+  marginTop: '5em',
 }
 
 const OpenCardStack: StatelessComponent<IOpenCardStackProps> =

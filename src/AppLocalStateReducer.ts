@@ -17,7 +17,7 @@ export const getInitialState = (): IAppState => {
     cardMatched: false,
     finalWinner: '',
     currentRoundResult: '',
-    nextTurn: '',
+    nextTurn: PLAYER,
   };
 };
 
