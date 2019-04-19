@@ -13,7 +13,6 @@ class App extends Component<{}, IAppState> {
 
   public constructor() {
     super({});
-
     this.state = getInitialState();
   }
 
@@ -23,23 +22,19 @@ class App extends Component<{}, IAppState> {
   }
 
   private setTimerForComputerToPlay = () => {
-    if (this.state.nextTurn === COMPUTER) {
+    if (this.state.nextTurn === COMPUTER && !this.state.cardMatched) {
       window.setTimeout(() => {
-        this.setState(onComputerMove, () => {
-          if (this.state.cardMatched) {
-            this.setTimerForComputerToSnap();
-          }
-        });
+        this.setState(onComputerMove, this.setSnapTimerWhenMatched);
       }, WAIT_FOR_COMPUTER);
     }
   }
 
-  private setTimerForComputerToSnap = () => {
-    this.snapTimeoutId = window.setTimeout(() => {
-      this.setState(onComputerSnap, () => {
-        this.setTimerForComputerToPlay();
-      });
-    }, this.state.snapWaitTime * SNAP_TIME_MULTIPLIER);
+  private setSnapTimerWhenMatched = () => {
+    if (this.state.cardMatched) {
+      this.snapTimeoutId = window.setTimeout(() => {
+        this.setState(onComputerSnap, this.setTimerForComputerToPlay);
+      }, this.state.snapWaitTime * SNAP_TIME_MULTIPLIER);
+    }
   }
 
   private onCardPlay = () => {
@@ -48,10 +43,7 @@ class App extends Component<{}, IAppState> {
     }
 
     this.setState(onPlayerMove, () => {
-      if (this.state.cardMatched) {
-        this.setTimerForComputerToSnap();
-        return;
-      }
+      this.setSnapTimerWhenMatched();
       this.setTimerForComputerToPlay();
     });
   }
