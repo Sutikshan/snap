@@ -6,10 +6,10 @@ const isCardMatched = (prevCard: ICard, currentCard: ICard) =>
   prevCard.cardRank === currentCard.cardRank;
 
 export const getInitialState = (): IAppState => {
-  const { userCards, computerCards } = dealCards();
+  const { playerCards: playerCards, computerCards } = dealCards();
 
   return {
-    userCards,
+    playerCards,
     computerCards,
     openCards: [],
     waitForComputer: false,
@@ -26,7 +26,7 @@ export const onPlayerMove = (prevState: IAppState) => {
     return prevState;
   }
   let cardMatched = false;
-  const currentPlayedCard = prevState.userCards[0];
+  const currentPlayedCard = prevState.playerCards[0];
   const lastPlayedCard = prevState.openCards[0];
   if (!currentPlayedCard) {
     return {
@@ -42,7 +42,7 @@ export const onPlayerMove = (prevState: IAppState) => {
   }
   return {
     openCards: addToTop(currentPlayedCard, prevState.openCards),
-    userCards: removeFromTop(prevState.userCards),
+    playerCards: removeFromTop(prevState.playerCards),
     waitForComputer: true,
     cardMatched,
     finalWinner,
@@ -66,7 +66,7 @@ export const onComputerMove = (prevState: IAppState) => {
     cardMatched = isCardMatched(lastPlayedCard, currentPlayedCard);
   }
   let finalWinner = '';
-  if (prevState.userCards.length === 0) {
+  if (prevState.playerCards.length === 0) {
     finalWinner = COMPUTER;
   }
   return {
@@ -79,20 +79,16 @@ export const onComputerMove = (prevState: IAppState) => {
   };
 };
 
-export const onComputerSnap = (prevState: IAppState) => {
-  return {
+export const onComputerSnap = (prevState: IAppState) => ({
     computerCards: [...prevState.computerCards, ...prevState.openCards],
     openCards: [],
     cardMatched: false,
     currentRoundResult: COMPUTER,
-  }
-};
+  });
 
-export const onPlayerSnap = (prevState: IAppState) => {
-  return {
-    userCards: [...prevState.userCards, ...prevState.openCards],
+export const onPlayerSnap = (prevState: IAppState) => ({
+    playerCards: [...prevState.playerCards, ...prevState.openCards],
     openCards: [],
     cardMatched: false,
     currentRoundResult: PLAYER,
-  }
-};
+  });

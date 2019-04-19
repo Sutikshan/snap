@@ -1,16 +1,3 @@
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-.AnimateHasTurn {
-  animation: fadeInAnimation 1s infinite;
-}
 
 .hiddenCardContainer {
   padding: 2em;
@@ -19,4 +6,11 @@
 .playerHeader {
   display: flex;
   justify-content: center;
+}
+
+.playerStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20em;
 }

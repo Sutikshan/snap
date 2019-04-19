@@ -13,18 +13,13 @@ export enum CARD_SUIT {
   spade = 'SPADE',
 }
 
-export const CARD_SIZE = {
-  width: '15em',
-  height: '20em',
-};
-
 export interface ICard {
   cardSuit: CARD_SUIT,
   cardRank: number,
 }
 
 export interface IDealtCards {
-  userCards: ICard[],
+  playerCards: ICard[],
   computerCards: ICard[],
 }
 
@@ -55,7 +50,20 @@ export function dealCards(): IDealtCards {
   const shuffleCards = shuffle(freshDeck);
 
   return {
-    userCards: shuffleCards.slice(0, USER_SHARE),
+    playerCards: shuffleCards.slice(0, USER_SHARE),
     computerCards: shuffleCards.slice(26, DECK_SIZE),
   };
+}
+
+export interface ICardDeckStyle {
+  boxShadow: string;
+  backgroundColor: string;
+}
+
+export function getCardStackStyle(availableCardCount: number): ICardDeckStyle {
+  const shadowThickness = Math.floor(availableCardCount/3);
+  const boxShadow = `${shadowThickness}px ${shadowThickness}px 5px darkgrey`;
+  const backgroundColor = !availableCardCount ? 'white' : 'cornflowerblue';
+
+  return { boxShadow, backgroundColor };
 }

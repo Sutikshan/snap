@@ -58,11 +58,12 @@ class App extends Component<{}, IAppState> {
   }
 
   private reStart = () => {
+    window.clearTimeout(this.snapTimeoutId);
     this.setState(getInitialState());
   }
 
   render() {
-    const { openCards, nextTurn, cardMatched, finalWinner, computerCards, userCards } = this.state;
+    const { openCards, nextTurn, cardMatched, finalWinner, currentRoundResult, computerCards, playerCards } = this.state;
     const currentCard = openCards[0];
 
     return (
@@ -78,16 +79,19 @@ class App extends Component<{}, IAppState> {
             cardStackBelongTo={COMPUTER}
             isNextTurn={nextTurn === COMPUTER}
             availableCardCount={computerCards.length}
+            isCurrentRoundWinner={currentRoundResult === COMPUTER}
           />
           <OpenCardStack
             onClick={this.onOpenCardClick}
             currentCard={currentCard}
+            availableCardCount={openCards.length}
           />
           <HiddenCardStack
             onClick={this.onCardPlay}
             cardStackBelongTo={PLAYER}
             isNextTurn={nextTurn === PLAYER}
-            availableCardCount={userCards.length}
+            availableCardCount={playerCards.length}
+            isCurrentRoundWinner={currentRoundResult === PLAYER}
           />
         </div>
 
@@ -99,7 +103,7 @@ class App extends Component<{}, IAppState> {
             type="range"
             id="reactionTimeInput"
             name="reactionTime"
-            min="0" max="5" />
+            min="1" max="5" />
         </div>
         <button
           name="startButton"

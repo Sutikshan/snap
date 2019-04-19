@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## TODO
+* Try react hooks to manage state of App.tsx
+* Provide keyboard support and sound for a11ly
+* Use CSS Grid, top margin for some elements are ugly.
+
 ## Available Scripts
 
 In the project directory, you can run:

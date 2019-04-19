@@ -1,24 +1,22 @@
 import React, { StatelessComponent } from 'react';
-import { ICard, CARD_SIZE } from './App.config';
+import { ICard, getCardStackStyle } from './App.config';
 
 interface IOpenCardStackProps {
   onClick: () => void;
   currentCard?: ICard;
-}
-
-const divStyle = {
-  backgroundColor: 'cornflowerblue',
-  ...CARD_SIZE,
-  border: '2px solid red',
-  marginTop: '5em',
+  availableCardCount: number,
 }
 
 const OpenCardStack: StatelessComponent<IOpenCardStackProps> =
-({ onClick, currentCard })  => (
-  <div style={divStyle} onClick={onClick}>
-    {currentCard && currentCard.cardRank}
-    {currentCard && currentCard.cardSuit}
-  </div>
-);
+  ({ availableCardCount, onClick, currentCard }) => {
+    const style = getCardStackStyle(availableCardCount);
+
+    return (
+      <div onClick={onClick} className="cardContainer openCardStack" style={style}>
+        {currentCard && currentCard.cardRank}
+        {currentCard && currentCard.cardSuit}
+      </div>
+    );
+  }
 
 export default OpenCardStack;

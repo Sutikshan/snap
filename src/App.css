@@ -24,10 +24,28 @@
   padding: 10px 32px;
   color: white;
   margin: 1em;
+  border-radius: 0.5em;
 }
 
 .snapHeader {
   display: flex;
   margin: auto;
   justify-content: center;
+}
+
+.cardContainer {
+  width: 15em;
+  height: 20em;
+  border: 1px solid darkgray;
+  border-radius: 1em;
+}
+
+.hiddenCardStack {
+  margin-top: 2em;
+  background-color: cornflowerblue;
+}
+
+.openCardStack {
+  margin-top: 5em;
+  background-color: white;
 }
