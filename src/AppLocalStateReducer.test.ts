@@ -17,7 +17,6 @@ describe('AppLocalStateReducer', () => {
       expect(initialState.playerCards.length).toBe(26);
       expect(initialState.computerCards.length).toBe(26);
       expect(initialState.openCards.length).toBe(0);
-      expect(initialState.nextTurn).toBe(PLAYER);
     });
   });
 
