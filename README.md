@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Please edit index.tsx to configure wait time for computer to move and snap.
+
 ## TODO
 * Make it responsive - Partially done.
 * Unit Testing - DONE
