@@ -35,3 +35,11 @@
 .reversedRange {
   direction: rtl;
 }
+
+@media (max-width: 760px) {
+  .openCardStack {
+    position: relative;
+    margin-top: 12vh;
+    background-color: white;
+  }
+}

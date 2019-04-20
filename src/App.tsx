@@ -97,31 +97,32 @@ class App extends Component<IAppProps, IAppState> {
             isCurrentRoundWinner={currentRoundResult === PLAYER}
           />
         </div>
-
-        <div className="reactionTime">
-          <label htmlFor="reactionTime">Reaction Time</label>
-          <input
-            onChange={this.onSnapTimeChange}
-            value={this.state.snapWaitTime}
-            type="range"
-            id="reactionTimeInput"
-            name="reactionTime"
-            className="reversedRange"
-            min="1" max="5" />
+        <div className="footerContents">
+          <div className="reactionTime">
+            <label htmlFor="reactionTime">Reaction Time</label>
+            <input
+              onChange={this.onSnapTimeChange}
+              value={this.state.snapWaitTime}
+              type="range"
+              id="reactionTimeInput"
+              name="reactionTime"
+              className="reversedRange"
+              min="1" max="5" />
+          </div>
+          <button
+            name="startButton"
+            className="startButton"
+            type="button"
+            onClick={this.reStart}
+          >
+            Start
+          </button>
+          {finalWinner && <div className="winnerLabel">
+            <label>👏</label>
+            <label>{finalWinner} Won</label>
+            <label>👏</label>
+          </div>}
         </div>
-        <button
-          name="startButton"
-          className="startButton"
-          type="button"
-          onClick={this.reStart}
-        >
-          Start
-        </button>
-        {finalWinner && <div className="winnerLabel">
-          <label>👏</label>
-          <label>{finalWinner} Won</label>
-          <label>👏</label>
-        </div>}
       </div>
     );
   }

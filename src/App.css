@@ -39,3 +39,40 @@
   border: 1px solid darkgray;
   border-radius: 1em;
 }
+
+@media (max-width: 760px) {
+  .App {
+    width: 100%;
+    height: 100%;
+  }
+
+  .cardSetup {
+    width: 100vw;
+    height: 60vh;
+  }
+
+  .cardContainer {
+    width: 20vw;
+    height: 50vh;
+  }
+
+  .reactionTime {
+    margin-top: 2vh;
+  }
+
+  .reactionTime > input {
+    margin: 1vw;
+  }
+
+  .startButton {
+    padding: 2vh 2vw;
+    margin: 2vw;
+    border-radius: 2vw;
+  }
+
+  .footerContents {
+    display: flex;
+    margin-top: 10vh;
+    margin-left: 10vw;
+  }
+}

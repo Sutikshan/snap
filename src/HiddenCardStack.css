@@ -34,3 +34,9 @@
   top: 0;
   right: 0;
 }
+
+@media (max-width: 760px) {
+  .hiddenCardContainer {
+    padding: 0vh 10vw;
+  }
+}
