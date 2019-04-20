@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## TODO
-* Make it responsive
+* Make it responsive - Partially done.
 * Unit Testing - DONE
 * Provide keyboard support and sound for a11ly
 * Try react hooks to manage state of App.tsx
