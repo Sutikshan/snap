@@ -19,6 +19,12 @@ class App extends Component<IAppProps, IAppState> {
     this.state = getInitialState();
   }
 
+  componentDidMount() {
+    if (this.state.nextTurn === COMPUTER) {
+      this.setTimerForComputerToPlay();
+    }
+  }
+
   private setTimerForComputerToPlay = () => {
     if (this.state.nextTurn === COMPUTER && !this.state.cardMatched) {
       window.setTimeout(() => {
@@ -62,7 +68,11 @@ class App extends Component<IAppProps, IAppState> {
 
   private reStart = () => {
     window.clearTimeout(this.snapTimeoutId);
-    this.setState(getInitialState());
+    this.setState(getInitialState(), () => {
+      if (this.state.nextTurn === COMPUTER) {
+        this.setTimerForComputerToPlay();
+      }
+    });
   }
 
   render() {

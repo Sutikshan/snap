@@ -42,7 +42,7 @@ export const getInitialState = (): IAppState => {
     cardMatched: false,
     finalWinner: '',
     currentRoundResult: '',
-    nextTurn: PLAYER,
+    nextTurn: shuffle([PLAYER, COMPUTER])[0],
   };
 };
 
