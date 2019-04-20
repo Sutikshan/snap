@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { IAppState, COMPUTER, PLAYER } from './App.config';
+import { IAppState, COMPUTER, PLAYER, IAppProps } from './App.config';
 import HiddenCardStack from './HiddenCardStack';
 import OpenCardStack from './OpenCardStack';
 import {
@@ -11,14 +11,11 @@ import {
   onPlayerSnap,
 } from './AppLocalStateReducer';
 
-const WAIT_FOR_COMPUTER = 400;
-const SNAP_TIME_MULTIPLIER = 1000;
-
-class App extends Component<{}, IAppState> {
+class App extends Component<IAppProps, IAppState> {
   private snapTimeoutId: number = -1;
 
-  public constructor() {
-    super({});
+  public constructor(props: IAppProps) {
+    super(props);
     this.state = getInitialState();
   }
 
@@ -26,7 +23,7 @@ class App extends Component<{}, IAppState> {
     if (this.state.nextTurn === COMPUTER && !this.state.cardMatched) {
       window.setTimeout(() => {
         this.setState(onComputerMove, this.setSnapTimerWhenMatched);
-      }, WAIT_FOR_COMPUTER);
+      }, this.props.computerPlayWaitTime);
     }
   }
 
@@ -34,7 +31,7 @@ class App extends Component<{}, IAppState> {
     if (this.state.cardMatched) {
       this.snapTimeoutId = window.setTimeout(() => {
         this.setState(onComputerSnap, this.setTimerForComputerToPlay);
-      }, this.state.snapWaitTime * SNAP_TIME_MULTIPLIER);
+      }, this.state.snapWaitTime * this.props.computerSnapWaitTime);
     }
   }
 

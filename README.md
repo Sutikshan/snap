@@ -1,9 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## TODO
-* Try react hooks to manage state of App.tsx
+* Make it responsive
+* Unit Testing - DONE
 * Provide keyboard support and sound for a11ly
+* Try react hooks to manage state of App.tsx
 * Use CSS Grid, top margin for some elements are ugly.
+* Add Card Flip Animation
 
 ## Available Scripts
 

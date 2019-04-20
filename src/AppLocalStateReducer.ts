@@ -1,9 +1,34 @@
-import { IAppState, dealCards, ICard, COMPUTER, PLAYER } from "./App.config";
+import { IAppState, ICard, COMPUTER, PLAYER, CARD_SUIT, SUIT_LENGTH, IDealtCards, USER_SHARE, DECK_SIZE } from "./App.config";
+import shuffle from 'lodash.shuffle';
 
 const addToTop = (card: ICard, cards: ICard[]) => [card, ...cards];
 const removeFromTop = (cards: ICard[]) => cards.slice(1, cards.length);
 const isCardMatched = (prevCard: ICard, currentCard: ICard) =>
   prevCard.cardRank === currentCard.cardRank;
+
+const cardRanks = ['A', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
+
+const createDeckForSuit = (cardSuit: CARD_SUIT): ICard[] => {
+  const cardSuitCollection: ICard[] = [];
+  for (var i = 0; i < SUIT_LENGTH; i++) {
+    cardSuitCollection.push({ cardRank: cardRanks[i] , cardSuit })
+  }
+  return cardSuitCollection;
+};
+
+function dealCards(): IDealtCards {
+  const freshDeck:ICard[] = [...createDeckForSuit(CARD_SUIT.club),
+    ...createDeckForSuit(CARD_SUIT.diamond),
+    ...createDeckForSuit(CARD_SUIT.heart),
+    ...createDeckForSuit(CARD_SUIT.spade)
+  ];
+  const shuffleCards = shuffle(freshDeck);
+
+  return {
+    playerCards: shuffleCards.slice(0, USER_SHARE),
+    computerCards: shuffleCards.slice(26, DECK_SIZE),
+  };
+}
 
 export const getInitialState = (): IAppState => {
   const { playerCards: playerCards, computerCards } = dealCards();
@@ -13,7 +38,7 @@ export const getInitialState = (): IAppState => {
     computerCards,
     openCards: [],
     waitForComputer: false,
-    snapWaitTime: 1,
+    snapWaitTime: 5,
     cardMatched: false,
     finalWinner: '',
     currentRoundResult: '',
@@ -25,14 +50,11 @@ export const onPlayerMove = (prevState: IAppState) => {
   if (prevState.finalWinner) {
     return prevState;
   }
-  let cardMatched = false;
+
   const currentPlayedCard = prevState.playerCards[0];
   const lastPlayedCard = prevState.openCards[0];
-  if (!currentPlayedCard) {
-    return {
-      finalWinner: COMPUTER,
-    };
-  }
+
+  let cardMatched = false;
   if (lastPlayedCard) {
     cardMatched = isCardMatched(lastPlayedCard, currentPlayedCard);
   }
@@ -57,10 +79,6 @@ export const onComputerMove = (prevState: IAppState) => {
   let cardMatched = false;
   const lastPlayedCard = prevState.openCards[0];
   const currentPlayedCard = prevState.computerCards[0];
-
-  if (!currentPlayedCard) {
-    return { finalWinner: PLAYER };
-  }
 
   if (lastPlayedCard) {
     cardMatched = isCardMatched(lastPlayedCard, currentPlayedCard);

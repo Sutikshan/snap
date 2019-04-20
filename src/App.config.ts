@@ -1,8 +1,6 @@
-import shuffle from 'lodash.shuffle';
-
-const SUIT_LENGTH = 13;
-const DECK_SIZE = 52;
-const USER_SHARE = DECK_SIZE / 2;
+export const DECK_SIZE = 52;
+export const SUIT_LENGTH = 13;
+export const USER_SHARE = DECK_SIZE / 2;
 export const COMPUTER = 'Computer';
 export const PLAYER = 'Player';
 
@@ -32,28 +30,10 @@ export interface IAppState extends IDealtCards {
   currentRoundResult: string;
   nextTurn: string;
 }
-const cardRanks = ['A', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
 
-const createDeckForSuit = (cardSuit: CARD_SUIT): ICard[] => {
-  const cardSuitCollection: ICard[] = [];
-  for (var i = 0; i < SUIT_LENGTH; i++) {
-    cardSuitCollection.push({ cardRank: cardRanks[i] , cardSuit })
-  }
-  return cardSuitCollection;
-};
-
-export function dealCards(): IDealtCards {
-  const freshDeck:ICard[] = [...createDeckForSuit(CARD_SUIT.club),
-    ...createDeckForSuit(CARD_SUIT.diamond),
-    ...createDeckForSuit(CARD_SUIT.heart),
-    ...createDeckForSuit(CARD_SUIT.spade)
-  ];
-  const shuffleCards = shuffle(freshDeck);
-
-  return {
-    playerCards: shuffleCards.slice(0, USER_SHARE),
-    computerCards: shuffleCards.slice(26, DECK_SIZE),
-  };
+export interface IAppProps {
+  computerPlayWaitTime: number;
+  computerSnapWaitTime: number;
 }
 
 export interface ICardDeckStyle {
